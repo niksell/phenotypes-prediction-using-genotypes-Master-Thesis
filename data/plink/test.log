@@ -1,0 +1,30 @@
+PLINK v1.90b3.45 64-bit (13 Jan 2017)
+Options in effect:
+  --1
+  --allow-no-sex
+  --bfile E:\genotypes\chr11
+  --extract C:\Users\ANTONIS\Desktop\snpsList.txt
+  --keep-fam E:\genotypes\fidList.txt
+  --out test
+  --recode A
+
+Hostname: ANTONIS
+Working directory: C:\Users\ANTONIS\Desktop\plink
+Start time: Mon Feb 13 22:33:31 2017
+
+Random number seed: 1487018011
+8087 MB RAM detected; reserving 4043 MB for main workspace.
+3603469 variants loaded from .bim file.
+152249 people (0 males, 0 females, 152249 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to test.nosex .
+--extract: 22 variants remaining.
+--keep-fam: 4980 people remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 4980 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate in remaining samples is 0.994213.
+22 variants and 4980 people pass filters and QC.
+Note: No phenotypes present.
+--recode A to test.raw ... done.
+
+End time: Mon Feb 13 22:33:35 2017

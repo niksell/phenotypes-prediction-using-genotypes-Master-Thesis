@@ -1,0 +1,15 @@
+PLINK v1.90b3.45 64-bit (13 Jan 2017)
+Options in effect:
+  --1
+  --allow-no-sex
+  --assoc ??bfile E:\genotypes\chr11
+  --pheno E:\genotypes\phenotype_edit.txt ??out chr11_final
+
+Hostname: ANTONIS
+Working directory: C:\Users\ANTONIS\Desktop\plink
+Start time: Mon Feb 13 10:06:42 2017
+
+Error: Invalid --assoc parameter '??bfile'.
+For more information, try 'plink --help [flag name]' or 'plink --help | more'.
+
+End time: Mon Feb 13 10:06:42 2017

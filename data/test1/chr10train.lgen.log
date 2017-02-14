@@ -1,0 +1,22 @@
+PLINK v1.90b3.45 64-bit (13 Jan 2017)
+Options in effect:
+  --1
+  --allow-no-sex
+  --bfile E:\genotypes\chr11
+  --extract chr10snpList.txt
+  --keep-fam trainPatient.txt
+  --out chr10train.lgen
+  --recode lgen
+
+Hostname: ANTONIS
+Working directory: C:\Users\ANTONIS\Desktop\test1
+Start time: Tue Feb 14 19:45:58 2017
+
+Random number seed: 1487094358
+8087 MB RAM detected; reserving 4043 MB for main workspace.
+3603469 variants loaded from .bim file.
+152249 people (0 males, 0 females, 152249 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to chr10train.lgen.nosex .
+Error: No variants remaining after --extract.
+
+End time: Tue Feb 14 19:46:01 2017
