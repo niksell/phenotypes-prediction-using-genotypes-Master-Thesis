@@ -1,0 +1,30 @@
+PLINK v1.90b3.45 64-bit (13 Jan 2017)
+Options in effect:
+  --1
+  --allow-no-sex
+  --bfile E:\genotypes\chr10
+  --extract chr10snpList.txt
+  --keep-fam trainPatient.txt
+  --out chr10train
+  --recode lgen
+
+Hostname: ANTONIS
+Working directory: C:\Users\ANTONIS\Desktop\test1
+Start time: Tue Feb 14 20:39:21 2017
+
+Random number seed: 1487097561
+8087 MB RAM detected; reserving 4043 MB for main workspace.
+3556340 variants loaded from .bim file.
+152249 people (0 males, 0 females, 152249 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to chr10train.nosex .
+--extract: 5 variants remaining.
+--keep-fam: 4482 people remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 4482 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate in remaining samples is 0.986702.
+5 variants and 4482 people pass filters and QC.
+Note: No phenotypes present.
+--recode lgen to chr10train.lgen + chr10train.map + chr10train.fam ... done.
+
+End time: Tue Feb 14 20:39:27 2017

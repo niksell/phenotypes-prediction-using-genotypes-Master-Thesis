@@ -1,0 +1,29 @@
+PLINK v1.90b3.45 64-bit (13 Jan 2017)
+Options in effect:
+  --1
+  --allow-no-sex
+  --bfile E:\genotypes\chr12
+  --extract chr12snpList.txt
+  --keep-fam trainPatient.txt
+  --out chr12train
+  --recode lgen
+
+Hostname: ANTONIS
+Working directory: C:\Users\ANTONIS\Desktop\test1
+Start time: Tue Feb 14 20:39:30 2017
+
+Random number seed: 1487097570
+8087 MB RAM detected; reserving 4043 MB for main workspace.
+3438092 variants loaded from .bim file.
+152249 people (0 males, 0 females, 152249 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to chr12train.nosex .
+--extract: 1 variant remaining.
+--keep-fam: 4482 people remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 4482 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+1 variant and 4482 people pass filters and QC.
+Note: No phenotypes present.
+--recode lgen to chr12train.lgen + chr12train.map + chr12train.fam ... done.
+
+End time: Tue Feb 14 20:39:34 2017
