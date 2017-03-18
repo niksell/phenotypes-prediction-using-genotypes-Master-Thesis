@@ -1,5 +1,5 @@
 patients = open('phenotype_euro_edit.txt','r')
-patientsBa = open('phenotype_euro_balanced.txt','w')
+patientsBa = open('phenotype_euro_balanced2.txt','w')
 
 case = 0 
 
@@ -23,7 +23,7 @@ control = 1
 lines = 0
 for i in patients:
 	if int (i.split()[3].strip()) == 0:
-		if control <= case:
+		if control <= case + (case*20/100):
 			if int (i.split()[3].strip()) == 1:
 				print("ok1")
 			patientsBa.write(i)
