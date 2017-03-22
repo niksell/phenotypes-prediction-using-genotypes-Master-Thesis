@@ -1,5 +1,5 @@
 patients = open('phenotype_euro_edit.txt','r')
-patientsBa = open('phenotype_euro_balanced_train7.txt','w')
+patientsBa = open('phenotype_euro_balanced_train10.txt','w')
 
 case = 0
 balanced = []
@@ -25,7 +25,7 @@ case = 1
 lines = 0
 for i in patients:
 	if int (i.split()[3].strip()) == 0:
-		if control <= 1250 :
+		if control <= 1000 :
 
 			patientsBa.write(i)
 			balanced.append(i.split()[0])
@@ -46,7 +46,7 @@ patients.close()
 patientsBa.close()
 
 patients = open('phenotype_euro_edit.txt','r')
-patientsTest = open('phenotype_euro_balanced_test7.txt','w')
+patientsTest = open('phenotype_euro_balanced_test10.txt','w')
 
 i = patients.readline()
 
@@ -58,7 +58,7 @@ for i in patients:
 	if i.split()[0] not in balanced:
 
 		if int (i.split()[3].strip()) == 0:
-			if count < 300:
+			if count < 306:
 				count += 1
 				patientsTest.write(i)
 		else:
