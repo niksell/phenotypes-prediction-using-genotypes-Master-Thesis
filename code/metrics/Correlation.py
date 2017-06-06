@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class Correlation():
     
@@ -9,9 +10,9 @@ class Correlation():
         self.matrix = X
         self.meanMatrix = np.zeros((self.m,1))
         self.covMatrix = None
-        self.correlationMatrix = np.zeros((self.m,self.m))
+        self.correlationMatrix = np.zeros((self.m,self.m),dtype = float)
         self.varMatrix = np.zeros((self.m),dtype = float)
-        self.normalizedMatrix = np.zeros((self.n,self.m))
+        self.normalizedMatrix = np.zeros((self.n,self.m),dtype = float)
         
         self.__calculateMeanMatrix()
         self.__normalizeMatrix()
@@ -48,18 +49,11 @@ class Correlation():
             self.varMatrix[i] = math.sqrt((self.normalizedMatrix[:,i].dot(self.normalizedMatrix[:,i])) / (self.n-1 )) 
     
     def __calclulateCorr(self):
-        count = 0
+        
         for i in range(self.m):
             
             for j in range(i,self.m):
                 
-                if count == 0:
-                    count = 1
-                    print("i = ",i)
-                    print("j = ",j)
-                    print(self.covMatrix[i,j])
-                    print(self.varMatrix[i])
-                    print(self.varMatrix[i])
                     
                 result1 = self.covMatrix[i,j]
                 result2 = self.varMatrix[i]
