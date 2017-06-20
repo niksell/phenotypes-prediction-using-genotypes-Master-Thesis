@@ -5,12 +5,12 @@ class Write:
     
     def __init__(self,path,numberOfChromosomes):
         
-        self.path = path
-        self.numberOfChromosomes = numberOfChromosomes
+        self.__path = path
+        self.__numberOfChromosomes = numberOfChromosomes
         
     def writePatientsList(self,patients,kind):
         
-        path = self.path + kind
+        path = self.__path + kind
         
         try:
             write = open(path,'w')
@@ -25,11 +25,11 @@ class Write:
         
     def writeSnpsList(self,chromosomes):
         
-        for i in range(self.numberOfChromosomes):
+        for i in range(self.__numberOfChromosomes):
     
             chro = 'chr'+str(i+1)
             try:
-                path = self.path + chro + 'snpList.txt'
+                path = self.__path + chro + 'snpList.txt'
                 write = open(path,'w')
 
                 for snp in chromosomes[chro].keys():
@@ -46,7 +46,7 @@ class Write:
             print("give a name to file")
             return
         
-        path = self.path + name
+        path = self.__path + name
         
         if os.path.exists(path):
             print("the file already exists........ give another name")
@@ -78,13 +78,13 @@ class Write:
             print("error = ",x)
             write.close()
             
-    def saveData(self,ids,patients,patientKind,data,chroms = {}):
+    def saveData(self,ids,patients,data,chroms = {}):
     
-        self.__snpCodeLog(ids['patients']['idToName'],ids['snps']['idToName'],patients,data,patientKind)
+        self.__snpCodeLog(ids['patients']['idToName'],ids['snps']['idToName'],patients,data)
         
     def __patientsLogFile(self,ids,patientKind):
         
-        write = open(self.path + patientKind + 'Ids.txt','w')
+        write = open(self.__path + patientKind + 'Ids.txt','w')
         
         write.write(str(len(ids['nameToId'])) + '\n')
         
@@ -98,7 +98,7 @@ class Write:
         
         if len(chroms.keys()) > 0:
         
-            write = open(self.path + 'SnpsIds.txt','w')
+            write = open(self.__path + 'SnpsIds.txt','w')
         
             write.write(str(len(ids['nameToId'])) + '\n')
         
@@ -109,9 +109,9 @@ class Write:
             
             write.close()
             
-    def __snpCodeLog(self,patientsIds,snpsIds,patients,data,patientKind):
+    def __snpCodeLog(self,patientsIds,snpsIds,patients,data):
         
-        write = open(self.path + patientKind + 'snpCode.txt','w')
+        write = open(self.__path + 'snpCode.txt','w')
         
         write.write(str(len(patientsIds)) + '\n')
         write.write(str(len(snpsIds)) + '\n')

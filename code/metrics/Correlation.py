@@ -1,68 +1,79 @@
 import numpy as np
 import math
+import DataSet.SnpsSelection as s
 
 class Correlation():
     
-    def __init__(self,X):
+	def __init__(self,X):
         
-        self.n = len(X)
-        self.m = len(X.T)
-        self.matrix = X
-        self.meanMatrix = np.zeros((self.m,1))
-        self.covMatrix = None
-        self.correlationMatrix = np.zeros((self.m,self.m),dtype = float)
-        self.varMatrix = np.zeros((self.m),dtype = float)
-        self.normalizedMatrix = np.zeros((self.n,self.m),dtype = float)
+		self.__n = len(X)
+		self.__m = len(X.T)
+		self.__matrix = X
+		self.__meanMatrix = np.zeros((self.__m,1))
+		self.__covMatrix = None
+		self.__correlationMatrix = np.zeros((self.__m,self.__m),dtype = float)
+		self.__varMatrix = np.zeros((self.__m),dtype = float)
+		self.__normalizedMatrix = np.zeros((self.__n,self.__m),dtype = float)
         
-        self.__calculateMeanMatrix()
-        self.__normalizeMatrix()
-        self.__calculateCovMatrix()
-        self.__calculateVar()
-        self.__calclulateCorr()
+		self.__calculateMeanMatrix()
+		self.__normalizeMatrix()
+		self.__calculateCovMatrix()
+		self.__calculateVar()
+		self.__calclulateCorr()
         
-    def __calculateMeanMatrix(self):
+	def __calculateMeanMatrix(self):
         
-        for i in range(self.m):
-            summ = 0
-            for j in range(self.n):
-                summ = self.matrix[j,i] + summ
+		for i in range(self.__m):
+			summ = 0
+			for j in range(self.__n):
+				summ = self.__matrix[j,i] + summ
                 
-            self.meanMatrix[i] = summ / self.n
+			self.__meanMatrix[i] = summ / self.__n
             
-    def __normalizeMatrix(self):
+	def __normalizeMatrix(self):
         
-        for i in range(self.m):
+		for i in range(self.__m):
             
-            for j in range(self.n):
+			for j in range(self.__n):
                 
-                self.normalizedMatrix[j,i] = self.matrix[j,i] - self.meanMatrix[i] 
+				self.__normalizedMatrix[j,i] = self.__matrix[j,i] - self.__meanMatrix[i] 
      
-    def __calculateCovMatrix(self):
+	def __calculateCovMatrix(self):
        
-        self.covMatrix = (self.normalizedMatrix.T.dot(self.normalizedMatrix)) / (self.n - 1)
+		self.__covMatrix = (self.__normalizedMatrix.T.dot(self.__normalizedMatrix)) / (self.__n - 1)
         
         
-    def __calculateVar(self):
+	def __calculateVar(self):
         
-        for i in range(self.m):
+		for i in range(self.__m):
             
-            self.varMatrix[i] = math.sqrt((self.normalizedMatrix[:,i].dot(self.normalizedMatrix[:,i])) / (self.n-1 )) 
+			self.__varMatrix[i] = math.sqrt((self.__normalizedMatrix[:,i].dot(self.__normalizedMatrix[:,i])) / (self.__n-1 )) 
     
-    def __calclulateCorr(self):
+	def __calclulateCorr(self):
         
-        for i in range(self.m):
+		for i in range(self.__m):
             
-            for j in range(i,self.m):
-                
-                    
-                result1 = self.covMatrix[i,j]
-                result2 = self.varMatrix[i]
-                result3 = self.varMatrix[j]
-                result = result1 / (result2 * result3)
-                
-                self.correlationMatrix[i,j] = result
-                self.correlationMatrix[j,i] = result
-                
-    def getCorrMatrix(self):
-        
-        return self.correlationMatrix
+			for j in range(i,self.__m):
+			
+				result1 = self.__covMatrix[i,j]
+				result2 = self.__varMatrix[i]
+				result3 = self.__varMatrix[j]
+				result = result1 / (result2 * result3)
+				
+				self.__correlationMatrix[i,j] = result
+				self.__correlationMatrix[j,i] = result
+				
+	def getCorrMatrix(self):
+	
+		return self.__correlationMatrix
+		
+	
+	def getLowCorrelationSnps(self, b, c = 0):
+		
+		return s.lowCorrelation(self.__correlationMatrix, b, c)
+		
+	def getHighCorrelationSnps(self, b, c = 0):
+	
+		return s.highCorrelation(self.__correlationMatrix, b, c)
+	
+		

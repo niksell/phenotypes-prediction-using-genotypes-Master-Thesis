@@ -4,17 +4,17 @@ from DataStructure.PatientPhenotype import PatientPhenotype
 class Read:
     def __init__(self,path,numberOfChromosomes):
         
-        self.chromosomes = {}
-        self.numberOfSnps = 0
-        self.path = path
-        self.numberOfChromosomes = numberOfChromosomes
+        self.__chromosomes = {}
+        self.__numberOfSnps = 0
+        self.__path = path
+        self.__numberOfChromosomes = numberOfChromosomes
         
     def readPatients(self,kind):
         
         patients = {}
         
         try:
-            f = open(self.path + kind,'r')
+            f = open(self.__path + kind,'r')
             f.readline()
             
             
@@ -40,10 +40,10 @@ class Read:
     
     def readSnps(self,fileKind):
         
-        for i in range(self.numberOfChromosomes):
+        for i in range(self.__numberOfChromosomes):
     
             chro = 'chr'+str(i+1)
-            path = self.path + chro + fileKind
+            path = self.__path + chro + fileKind
             
             try:
                 
@@ -52,7 +52,7 @@ class Read:
                 
                 try:
 
-                    self.chromosomes[chro] = self.__readSnpsOfChromosome(f)
+                    self.__chromosomes[chro] = self.__readSnpsOfChromosome(f)
 
                     f.close()
 
@@ -67,7 +67,7 @@ class Read:
                 
     
                 
-        return self.chromosomes
+        return self.__chromosomes
     
     def __readSnpsOfChromosome(self,file):
         
@@ -82,7 +82,7 @@ class Read:
             try:
                 if line.split()[1].strip() != '.':
                     snps[line.split()[1].strip()] = alleles
-                    self.numberOfSnps += 1
+                    self.__numberOfSnps += 1
                     
             except Exception as x:
                 print("error = ",x)
@@ -94,10 +94,10 @@ class Read:
     def readLgen(self,patients,kind = ''):
         
         
-        for i in range(self.numberOfChromosomes):
+        for i in range(self.__numberOfChromosomes):
             
             chro = 'chr'+str(i+1)
-            path = self.path + chro + kind +'.lgen'
+            path = self.__path + chro + kind +'.lgen'
     
             if os.path.exists(path):
                 
@@ -125,22 +125,22 @@ class Read:
     
     def getListOfSnps(self):
         snps = []
-        for i in range(self.numberOfChromosomes):
+        for i in range(self.__numberOfChromosomes):
             chro = 'chr'+str(i+1)
-            for snp in self.chromosomes[chro].keys():
+            for snp in self.__chromosomes[chro].keys():
                 snps.append(snp)
         
         return snps
         
     def getNumberOfSnps(self):
         
-        return self.numberOfSnps
+        return self.__numberOfSnps
     
     
     def readSnpsCode(self,patients,kind = ''):
         
         try:
-            read = open(self.path + kind + 'snpCode.txt','r')
+            read = open(self.__path + kind + 'snpCode.txt','r')
             read.readline()
             read.readline()
             print("mphka2")

@@ -4,17 +4,17 @@ class DataSet:
     
     def __init__(self,patients,ids):
         
-        self.n = len(ids['patients']['nameToId'].keys())
-        self.m =len(ids['snps']['nameToId'].keys()) 
-        self.patients = patients
-        self.ids = ids
+        self.__n = len(ids['patients']['nameToId'].keys())
+        self.__m =len(ids['snps']['nameToId'].keys()) 
+        self.__patients = patients
+        self.__ids = ids
                      
-        self.xTable = np.zeros((self.n,self.m),dtype = int)
-        self.yTable = np.zeros((self.n,),dtype = int)
+        self.__xTable = np.zeros((self.__n,self.__m),dtype = int)
+        self.__yTable = np.zeros((self.__n,),dtype = int)
         
-        for i in range(self.n):
-            for j in range(self.m):
-                self.xTable[i,j] = -1
+        for i in range(self.__n):
+            for j in range(self.__m):
+                self.__xTable[i,j] = -1
                      
         self.__fillXTable()
         self.__fillYTable()
@@ -22,25 +22,25 @@ class DataSet:
                      
     def __fillXTable(self):
     
-        for i in range(self.n):
-            for j in range(self.m):
+        for i in range(self.__n):
+            for j in range(self.__m):
         
-                patient = self.ids['patients']['idToName'][i]
-                snp = self.ids['snps']['idToName'][j]
+                patient = self.__ids['patients']['idToName'][i]
+                snp = self.__ids['snps']['idToName'][j]
         
-                self.xTable[i,j] = self.patients[patient].getSnpCode(snp)
+                self.__xTable[i,j] = self.__patients[patient].getSnpCode(snp)
                      
     def __fillYTable(self):
     
-        for i in range(self.n):
+        for i in range(self.__n):
     
-            patient = self.ids['patients']['idToName'][i]
-            self.yTable[i] = self.patients[patient].getCase()
+            patient = self.__ids['patients']['idToName'][i]
+            self.__yTable[i] = self.__patients[patient].getCase()
         
     def getXTable(self):
                      
-        return self.xTable
+        return self.__xTable
                      
     def getYTable(self):
                      
-        return self.yTable
+        return self.__yTable
