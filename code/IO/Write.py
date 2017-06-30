@@ -1,5 +1,6 @@
 import os.path
 from DataStructure.PatientPhenotype import PatientPhenotype
+from DataStructure.Snp import Snp
 
 class Write:
     
@@ -81,6 +82,51 @@ class Write:
     def saveData(self,ids,patients,data,chroms = {}):
     
         self.__snpCodeLog(ids['patients']['idToName'],ids['snps']['idToName'],patients,data)
+        
+    def writeSnpLog(self,n,m,chromosomes):
+        
+        write = open(self.__path + 'snpCode.txt','w')
+        write.write(str(n) + '\n')
+        write.write(str(m) + '\n')
+        for i in range(self.__numberOfChromosomes):
+            
+            chro = 'chr'+str(i+1)
+            path = self.__path + chro +'.lgen'
+    
+            if os.path.exists(path):
+                
+                try:
+                    f = open(path,'r')
+                
+                    for line in f:
+                        try:
+                             
+                            patient = line.split()[0].strip()
+                            snp = line.split()[2].strip()
+                            allele1 = line.split()[3].strip()
+                            allele2 = line.split()[4].strip()
+                           
+                            snpp = Snp(snp,allele1,allele2)
+                            snpp.setSnpCode(chromosomes[chro][snp][0],chromosomes[chro][snp][1])
+                            code = snpp.getSnpCode()
+                            
+                            write.write(patient+ '\t' + snp+ '\t' + str(code).strip() + '\t' 
+                                                                            + allele1.strip() + '\t' + allele2.strip() + '\n')
+                            
+                        except Exception as x:
+                            print("error = ",x)
+                            f.close()
+                            write.close()
+                            
+                    f.close()
+              
+                except Exception as x:
+                        print("error = ",x)
+                        f.close()
+                        write.close()
+        write.close()
+        
+        
         
     def __patientsLogFile(self,ids,patientKind):
         

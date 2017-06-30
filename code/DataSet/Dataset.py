@@ -16,8 +16,8 @@ class DataSet:
             for j in range(self.__m):
                 self.__xTable[i,j] = -1
                      
-        self.__fillXTable()
-        self.__fillYTable()
+       # self.__fillXTable()
+       # self.__fillYTable()
                      
                      
     def __fillXTable(self):
@@ -36,6 +36,20 @@ class DataSet:
     
             patient = self.__ids['patients']['idToName'][i]
             self.__yTable[i] = self.__patients[patient].getCase()
+            
+            
+    def fillXTable1(self,patient,snp,code):
+    
+        
+        i = self.__ids['patients']['nameToId'][patient]
+        j = self.__ids['snps']['nameToId'][snp]
+        self.__xTable[i,j] = code
+                     
+    def fillYTable1(self,patient):
+    
+        
+        i = self.__ids['patients']['nameToId'][patient]
+        self.__yTable[i] = self.__patients[patient].getCase()
         
     def getXTable(self):
                      

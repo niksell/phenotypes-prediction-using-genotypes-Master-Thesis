@@ -1,11 +1,14 @@
 import os.path
 from DataStructure.PatientPhenotype import PatientPhenotype 
+from DataSet.Dataset import DataSet
+from IO.Write import Write
 
 class Read:
     def __init__(self,path,numberOfChromosomes):
         
         self.__chromosomes = {}
         self.__numberOfSnps = 0
+        self.__numberOfPatients = 0
         self.__path = path
         self.__numberOfChromosomes = numberOfChromosomes
         
@@ -21,6 +24,7 @@ class Read:
             try:
 
                 for line in f:
+                    self.__numberOfPatients  += 1
                     patients[line.split()[0].strip()] = PatientPhenotype(line.split()[0],line.split()[3],
                                                                          line.split()[1],line.split()[2])
                     
@@ -106,10 +110,15 @@ class Read:
                 
                     for line in f:
                         try:
-                            if line.split()[0].strip() in patients.keys():
-
-                                patients[line.split()[0].strip()].addSnps(line.split()[2].strip(),line.split()[3].strip(),
-                                                                                        line.split()[4].strip())
+                     
+                            patient = line.split()[0].strip()
+                            snp = line.split()[2].strip()
+                            allele1 = line.split()[3].strip()
+                            allele2 = line.split()[4].strip()
+                           
+                            patients[patient].addSnps(snp,allele1,allele2)
+                            patients[patient].snpCode(snp = snp, alleles = self.__chromosomes[chro][snp])
+                            
                         except Exception as x:
                             print("error = ",x)
                             f.close()
@@ -136,10 +145,14 @@ class Read:
         
         return self.__numberOfSnps
     
+    def getNumberOfPatients(self):
+        
+        return self.__numberOfPatients 
     
-    def readSnpsCode(self,patients,kind = ''):
+    def readSnpsCode(self,patients,ids,kind = ''):
         
         try:
+            dataset = DataSet(patients,ids)
             read = open(self.__path + kind + 'snpCode.txt','r')
             read.readline()
             read.readline()
@@ -147,14 +160,17 @@ class Read:
             for line in read:   
 
                 try:
+                    
                     patient = line.split('\t')[0].strip()
                     snp = line.split('\t')[1].strip()
                     code = int (line.split('\t')[2].strip())
                     allele1 = line.split('\t')[3].strip()
                     allele2 = line.split('\t')[4].strip()
-                    if patient in patients.keys() and snp != '.':
-                        patients[patient].addSnps(snp,allele1,allele2)
-                        patients[patient].snpCode(snp = snp,code = code)
+                
+                    dataset.fillXTable1(patient,snp,code)
+                    dataset.fillYTable1(patient)
+                   # patients[patient].addSnps(snp,allele1,allele2)
+                   # patients[patient].snpCode(snp = snp,code = code)
                 except Exception as x:
                     print("error = ",x)
                     read.close()
@@ -165,5 +181,5 @@ class Read:
             print("error = ",x)
             read.close()
             
-        return patients
+        return dataset.getXTable(), dataset.getYTable()  
             
