@@ -171,6 +171,7 @@ class Read:
                     dataset.fillYTable1(patient)
                    # patients[patient].addSnps(snp,allele1,allele2)
                    # patients[patient].snpCode(snp = snp,code = code)
+                    
                 except Exception as x:
                     print("error = ",x)
                     read.close()
