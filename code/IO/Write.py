@@ -1,4 +1,5 @@
 import os.path
+import time
 from DataStructure.PatientPhenotype import PatientPhenotype
 from DataStructure.Snp import Snp
 
@@ -47,11 +48,15 @@ class Write:
             print("give a name to file")
             return
         
-        path = self.__path + name
+        path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ) "
         
-        if os.path.exists(path):
-            print("the file already exists........ give another name")
-            return
+       
+    
+        i=1
+        while os.path.exists(path):
+            
+            path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ) " + '_' + str(i)
+            i += 1
         
         snps = []
         for i in snpsIds:
@@ -68,10 +73,10 @@ class Write:
                 chromList = chromosomes[chro]
 
                 if len(list(set(chromList) - set(snps))) < len(chromList):
-                    write.write("chromosome"+(i)+'\n')
+                    write.write("chromosome"+str(i)+'\n')
                     for j in snps:
                         if j in chromosomes[chro]:
-                            write.write(j + '\n')
+                            write.write(j + '\t' + chromosomes[chro][j][0] + '\t' + chromosomes[chro][j][1] + '\n')
                     write.write('\n')
 
             write.close()
