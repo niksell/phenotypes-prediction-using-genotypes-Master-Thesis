@@ -15,9 +15,7 @@ class DataSet:
         for i in range(self.__n):
             for j in range(self.__m):
                 self.__xTable[i,j] = -1
-                     
-       # self.__fillXTable()
-       # self.__fillYTable()
+   
                      
                      
     def __fillXTable(self):
