@@ -48,14 +48,12 @@ class Write:
             print("give a name to file")
             return
         
-        path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ) "
-        
-       
+        path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ).txt "  
     
         i=1
         while os.path.exists(path):
             
-            path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ) " + '_' + str(i)
+            path = self.__path + name  + " ( " + time.strftime("%d-%m-%Y") + " ) " + '_' + str(i)+".txt"
             i += 1
         
         snps = []
