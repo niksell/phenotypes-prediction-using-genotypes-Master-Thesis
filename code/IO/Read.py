@@ -167,10 +167,12 @@ class Read:
                     allele1 = line.split('\t')[3].strip()
                     allele2 = line.split('\t')[4].strip()
                 
-                    dataset.fillXTable1(patient,snp,code)
-                    dataset.fillYTable1(patient)
-                   # patients[patient].addSnps(snp,allele1,allele2)
-                   # patients[patient].snpCode(snp = snp,code = code)
+                    if patient in patients.keys():
+                        
+                        dataset.fillXTable1(patient,snp,code)
+                        dataset.fillYTable1(patient)
+                        # patients[patient].addSnps(snp,allele1,allele2)
+                        # patients[patient].snpCode(snp = snp,code = code)
                     
                 except Exception as x:
                     print("error = ",x)

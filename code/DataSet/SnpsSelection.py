@@ -86,8 +86,8 @@ def highCorrelation(X, b, c):
             snpsRed.append(i)
             count += 1
 
-    print("count = ",count)
-    print("len snpsRed = ",len(snpsRed))
+    #print("count = ",count)
+    #print("len snpsRed = ",len(snpsRed))
     
     return snpsRed
 
@@ -103,8 +103,8 @@ def lowCorrelation(X, b, c):
             snpsRed.append(i)
             count += 1
 
-    print("count = ",count)
-    print("len snpsRed = ",len(snpsRed))
+    #print("count = ",count)
+    #print("len snpsRed = ",len(snpsRed))
 
     return snpsRed
 
