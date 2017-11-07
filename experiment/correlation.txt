@@ -1,0 +1,7 @@
+In our experiments, we use the correlation of two SNPs in order to reduce the matrix MxN to a Matrix MxD (D<N ), M is the number of the patients and N is the number of SNPs. Correlation is a metric that shows us the dependence of two variables. Correlation formula of two SNPs is defined as  COR(X,Y) = COV(X,Y) / VAR(X)*VAR(Y) =i=1n(xi−x)(yi−y)/∑i=1n(xi−x)2(yi−y)2 .  In low correlation, belong SNPs which do not have correlation equal or higher to 0.7 with no one SNP. The rest of SNPs belong to high correlation category. Properties of Correlation:
+
+−1≤COR(X, Y)≤1
+COR(X,Y) = COR(Y,X)
+COR(X,X) = 1
+
+ First of all, we create a matrix N, N is the number of SNPs. This matrix has the correlation between SNPi and SNPj (1<=i<=N and 1<=j<=N). Using this matrix we divide the SNPs into two categories, the low correlation category, and the high correlation category. We define a threshold in order to divide them into two categories.  In low correlation, belong SNPs which do not have correlation equal or higher to 0.7 with no one SNP. The rest of SNPs belong to high correlation category. For example, the i-th SNP belongs to the low correlation category if SNP[i,j]<0.7 for all SNPs j (1<=i<=N, i+1<=j<=N). In this way, we want extract SNPs that maybe affect someone to be pathetic of an illness. Another reason is to avoid the classifiers' overfitting.
