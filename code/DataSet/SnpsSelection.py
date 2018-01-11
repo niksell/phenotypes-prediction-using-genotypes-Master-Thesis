@@ -15,7 +15,7 @@ def _countSnps(X,b):
 
         for j in range(i+1,len(X.T)):
 
-            if X[i,j] - b >= 1e-10:
+            if X[i,j] - b < 1e-10:
 
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
@@ -73,7 +73,7 @@ def _seperateControlsCases(x,y):
     return case, control
 
 
-def highCorrelation(X, b, c):
+def highCorrelation(X, b, up,down):
 
     snpsRed = []
     count = 0
@@ -81,7 +81,7 @@ def highCorrelation(X, b, c):
     snpsCount = _countSnps(X,b)
 
     for i in snpsCount.keys():
-        if snpsCount[i] > c * len(X.T) / 100:
+        if snpsCount[i] >= down * (len(X.T)-1) / 100 and snpsCount[i] <= up * (len(X.T)-1) / 100:
 
             snpsRed.append(i)
             count += 1
@@ -91,7 +91,7 @@ def highCorrelation(X, b, c):
     
     return snpsRed
 
-def lowCorrelation(X, b, c):
+def lowCorrelation(X, b, up,down):
 
     snpsRed = []
     count = 0
@@ -99,7 +99,8 @@ def lowCorrelation(X, b, c):
     snpsCount = _countSnps(X,b)
     
     for i in snpsCount.keys():
-        if snpsCount[i] <= c * len(X.T) / 100:
+        
+        if snpsCount[i] >= down * (len(X.T)-1) / 100 and snpsCount[i] <= up * (len(X.T)-1) / 100:
             snpsRed.append(i)
             count += 1
 
