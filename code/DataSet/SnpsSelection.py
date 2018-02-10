@@ -26,15 +26,20 @@ def _lowClass(X,b):
 
     snpsCount = _counterSnps(len(X.T))
 
+    
     for i in range(len(X)):
 
         for j in range(i+1,len(X.T)):
 
-            if X[i,j] - b <= 1e-10:
+            if X[i,j] - b <= 1e-10 :
 
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
-
+            
+        
+            
+           
+  
     return snpsCount
 
 
