@@ -68,9 +68,9 @@ class Correlation():
 		return self.__correlationMatrix
 		
 	
-	def getLowCorrelationSnps(self, b, up = 100, down = 0):
+	def getLowCorrelationSnps(self, b, c = 0, up = 100, down = 0):
 		
-		return s.lowCorrelation(self.__correlationMatrix, b, up, down)
+		return s.lowCorrelation(self.__correlationMatrix, b, c, up, down)
 		
 	def getHighCorrelationSnps(self, b, up = 100, down = 0):
 	

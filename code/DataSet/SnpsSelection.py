@@ -22,7 +22,7 @@ def _highClass(X,b):
 
     return snpsCount
 
-def _lowClass(X,b):
+def _lowClass(X,b,c):
 
     snpsCount = _counterSnps(len(X.T))
 
@@ -31,7 +31,7 @@ def _lowClass(X,b):
 
         for j in range(i+1,len(X.T)):
 
-            if X[i,j] - b <= 1e-10 :
+            if X[i,j] - b <= 1e-10 and X[i,j] >= c:
 
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
@@ -111,12 +111,12 @@ def highCorrelation(X, b, up,down):
     
     return snpsRed
 
-def lowCorrelation(X, b, up,down):
+def lowCorrelation(X, b, c, up,down):
 
     snpsRed = []
     count = 0
     
-    snpsCount = _lowClass(X,b)
+    snpsCount = _lowClass(X,b,c)
     
     for i in snpsCount.keys():
         
