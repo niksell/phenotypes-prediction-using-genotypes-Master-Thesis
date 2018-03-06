@@ -7,7 +7,7 @@ def _counterSnps(n):
     return snpsCount
 
 
-def _highClass(X,b):
+def _highClass(X,b,c):
 
     snpsCount = _counterSnps(len(X.T))
 
@@ -15,7 +15,7 @@ def _highClass(X,b):
 
         for j in range(i+1,len(X.T)):
 
-            if X[i,j] - b > 1e-10:
+            if X[i,j] - b > 1e-10 and X[i,j] >= c::
 
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
@@ -93,12 +93,12 @@ def _seperateControlsCases(x,y):
     return case, control
 
 
-def highCorrelation(X, b, up,down):
+def highCorrelation(X, b, c, up,down):
 
     snpsRed = []
     count = 0
     
-    snpsCount = _highClass(X,b)
+    snpsCount = _highClass(X,b,c)
 
     for i in snpsCount.keys():
         if snpsCount[i] >= down * (len(X.T)-1) / 100 and snpsCount[i] <= up * (len(X.T)-1) / 100:
