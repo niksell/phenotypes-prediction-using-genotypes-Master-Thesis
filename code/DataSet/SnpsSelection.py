@@ -15,7 +15,7 @@ def _highClass(X,b,c):
 
         for j in range(i+1,len(X.T)):
 
-            if X[i,j] - b > 1e-10 and X[i,j] >= c::
+            if X[i,j] - b > 1e-10 and X[i,j] >= c:
 
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
