@@ -12,7 +12,7 @@ class Correlation():
 		self.__meanMatrix = np.zeros((self.__m,1))
 		self.__covMatrix = None
 		self.__correlationMatrix = np.zeros((self.__m,self.__m),dtype = np.float32)
-		self.__varMatrix = np.zeros((self.__m),dtype = float)
+		self.__varMatrix = np.zeros((self.__m),dtype = np.float32)
 		self.__normalizedMatrix = np.zeros((self.__n,self.__m),dtype = np.float32)
         
 		self.__calculateMeanMatrix()
