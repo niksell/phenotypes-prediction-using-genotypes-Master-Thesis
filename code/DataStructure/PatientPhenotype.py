@@ -2,7 +2,7 @@ from DataStructure.Snp import Snp
 
 class PatientPhenotype:
     
-    def __init__(self, eid, case, sex, yearBirth):
+    def __init__(self, eid, case, sex='0', yearBirth='0'):
         
         self.eid = eid.strip()
         self.case = int (case.strip())
