@@ -111,12 +111,12 @@ def highCorrelation(X, b, c, up,down):
     
     return snpsRed
 
-def lowCorrelation(X, b, c, up,down):
+def lowCorrelation(X, threshold = 0.7, c = -2, up = 100,down = 100):
 
     snpsRed = []
     count = 0
     
-    snpsCount = _lowClass(X,b,c)
+    snpsCount = _lowClass(X,threshold,c)
     
     for i in snpsCount.keys():
         
@@ -124,8 +124,8 @@ def lowCorrelation(X, b, c, up,down):
             snpsRed.append(i)
             count += 1
 
-    #print("count = ",count)
-    #print("len snpsRed = ",len(snpsRed))
+    print("count = ",count)
+    print("len snpsRed = ",len(snpsRed))
 
     return snpsRed
 
