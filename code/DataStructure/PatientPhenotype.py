@@ -4,6 +4,11 @@ class PatientPhenotype:
     
     def __init__(self, eid, case, sex='0', yearBirth='0'):
         
+        if case.strip() == '1':
+            case = '0'
+        elif case.strip() == '2':
+            case = '1'
+        
         self.eid = eid.strip()
         self.case = int (case.strip())
         self.sex = sex.strip()

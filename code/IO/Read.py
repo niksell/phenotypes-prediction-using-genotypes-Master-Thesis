@@ -25,7 +25,7 @@ class Read:
 
                 for line in f:
                     self.__numberOfPatients  += 1
-                    patients[line.split()[0].strip()] = PatientPhenotype(line.split()[0],line.split()[3])
+                    patients[line.split()[0].strip()] = PatientPhenotype(line.split()[0],line.split()[2])
                     
                 f.close()
 
