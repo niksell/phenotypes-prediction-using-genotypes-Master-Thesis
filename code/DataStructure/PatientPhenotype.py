@@ -33,7 +33,7 @@ class PatientPhenotype:
     def snpCode(self,alleles = '', snp = '', code = -1):
     
         if code == -1:
-                
+           
             self.snps[snp.strip()].setSnpCode(alleles[0],alleles[1])
                     
         else:

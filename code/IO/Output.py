@@ -86,21 +86,22 @@ class Output:
     
         self.__snpCodeLog(ids['patients']['idToName'],ids['snps']['idToName'],patients,data)
         
-    def writeSnpLog(self,n,m,chromosomes):
+    def writeDf(self,n,m,chromosomes,snps,patients):
         
-        write = open(self.__path + 'snpCode.txt','w')
-        write.write(str(n) + '\n')
-        write.write(str(m) + '\n')
+        
+       
         for i in range(self.__numberOfChromosomes):
             
             chro = 'chr'+str(i+1)
             path = self.__path + chro +'.lgen'
-    
+            
+            j = 0
+            
             if os.path.exists(path):
                 
                 try:
                     f = open(path,'r')
-                
+                    
                     for line in f:
                         try:
                              
@@ -108,25 +109,42 @@ class Output:
                             snp = line.split()[2].strip()
                             allele1 = line.split()[3].strip()
                             allele2 = line.split()[4].strip()
-                           
-                            snpp = Snp(snp,allele1,allele2)
-                            snpp.setSnpCode(chromosomes[chro][snp][0],chromosomes[chro][snp][1])
-                            code = snpp.getSnpCode()
                             
-                            write.write(patient+ '\t' + snp+ '\t' + str(code).strip() + '\t' 
-                                                                            + allele1.strip() + '\t' + allele2.strip() + '\n')
+                            alleles = []
+                            alleles.append(chromosomes[chro][snp][0])
+                            alleles.append(chromosomes[chro][snp][1])
                             
+                            patients[patient].addSnps(snp,allele1,allele2)
+                            patients[patient].snpCode(alleles = alleles,snp = snp)
+                          
                         except Exception as x:
-                            print("error = ",x)
-                            f.close()
-                            write.close()
                             
+                            print("error1 = ",x)
+                            f.close()
+                              
                     f.close()
               
                 except Exception as x:
-                        print("error = ",x)
+                        print("error2 = ",x)
                         f.close()
-                        write.close()
+        
+        
+        write = open(self.__path + 'snpCodeTest.csv','w')
+        
+        write.write('patients,')
+        
+        for i in snps:
+            write.write(i + ',')
+            
+        write.write('label' + '\n')
+        
+        for i in patients.keys():
+            write.write(i + ',')
+            for j in snps:
+                write.write(str(patients[i].getSnpCode(j)) + ',')
+            write.write(str(patients[i].getCase()) + '\n')
+                        
+                
         write.close()
         
         
