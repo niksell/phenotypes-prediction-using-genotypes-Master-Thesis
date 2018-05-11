@@ -1,5 +1,6 @@
 import os.path
 import time
+import numpy as np
 from DataStructure.PatientPhenotype import PatientPhenotype
 from DataStructure.Snp import Snp
 
@@ -86,16 +87,16 @@ class Output:
     
         self.__snpCodeLog(ids['patients']['idToName'],ids['snps']['idToName'],patients,data)
         
-    def writeDf(self,n,m,chromosomes,snps,patients):
+    def writeDf(self,n,m,chromosomes,ids,patients):
         
-        
+        X = np.zeros((n,m))
        
         for i in range(self.__numberOfChromosomes):
             
             chro = 'chr'+str(i+1)
             path = self.__path + chro +'.lgen'
             
-            j = 0
+            
             
             if os.path.exists(path):
                 
@@ -109,13 +110,15 @@ class Output:
                             snp = line.split()[2].strip()
                             allele1 = line.split()[3].strip()
                             allele2 = line.split()[4].strip()
+                           
+                            snpp = Snp(snp,allele1,allele2)
+                            snpp.setSnpCode(chromosomes[chro][snp][0],chromosomes[chro][snp][1])
+                            code = snpp.getSnpCode()
                             
-                            alleles = []
-                            alleles.append(chromosomes[chro][snp][0])
-                            alleles.append(chromosomes[chro][snp][1])
+                            p = ids['patients']['nameToId'][patient]
+                            s = ids['snps']['nameToId'][snp]
                             
-                            patients[patient].addSnps(snp,allele1,allele2)
-                            patients[patient].snpCode(alleles = alleles,snp = snp)
+                            X[p,s] = code
                           
                         except Exception as x:
                             
@@ -128,21 +131,29 @@ class Output:
                         print("error2 = ",x)
                         f.close()
         
-        
+        print("x shape is ", X.shape)
         write = open(self.__path + 'snpCodeTest.csv','w')
         
         write.write('patients,')
         
-        for i in snps:
-            write.write(i + ',')
+        for i in range(len(X.T)):
+            
+            s = ids['snps']['idToName'][i]
+            write.write(s + ',')
             
         write.write('label' + '\n')
         
-        for i in patients.keys():
-            write.write(i + ',')
-            for j in snps:
-                write.write(str(patients[i].getSnpCode(j)) + ',')
-            write.write(str(patients[i].getCase()) + '\n')
+        for i in range(len(X)):
+            
+            p = ids['patients']['idToName'][i]
+            write.write(p + ',')
+                            
+            for j in range(len(X.T)):
+                
+                s = ids['snps']['idToName'][j]
+                write.write(str(X[i,j]) + ',')
+                
+            write.write(str(patients[p].getCase()) + '\n')
                         
                 
         write.close()
