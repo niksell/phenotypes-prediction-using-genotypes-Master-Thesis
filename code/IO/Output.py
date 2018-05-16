@@ -89,7 +89,7 @@ class Output:
         
     def writeDf(self,n,m,chromosomes,ids,patients):
         
-        X = np.zeros((n,m))
+        X = np.zeros((n,m),dtype = int)
        
         for i in range(self.__numberOfChromosomes):
             
@@ -132,7 +132,7 @@ class Output:
                         f.close()
         
         print("x shape is ", X.shape)
-        write = open(self.__path + 'snpCodeTest.csv','w')
+        write = open(self.__path + 'snpCodeTest1.csv','w')
         
         write.write('patients,')
         
