@@ -32,14 +32,11 @@ def _lowClass(X,b,c):
         for j in range(i+1,len(X.T)):
 
             if X[i,j] - b <= 1e-10 and X[i,j] >= c:
-
+            
                 snpsCount[i] = snpsCount[i] + 1
                 snpsCount[j] = snpsCount[j] + 1
             
-        
             
-           
-  
     return snpsCount
 
 
@@ -48,6 +45,8 @@ def _findCaseControl(y):
     cases = []
     controls = []
     
+
+              
     for i in range(len(yTraining1)):
         if y[i] == 0 :
             controls.append(i)
@@ -106,8 +105,8 @@ def highCorrelation(X, b, c, up,down):
             snpsRed.append(i)
             count += 1
 
-    #print("count = ",count)
-    #print("len snpsRed = ",len(snpsRed))
+    print("count = ",count)
+    print("len snpsRed = ",len(snpsRed))
     
     return snpsRed
 
@@ -129,7 +128,38 @@ def lowCorrelation(X, threshold = 0.7, c = -2, up = 100,down = 100):
 
     return snpsRed
 
-#def union(xMatrix, yMatrix, corMartrix, b, c):
+def getTheNSemanticSnps(X, n = 30, c = -2, threshold = 0.7):
+    
+    snpsRed = {}
+   
+    snpsCount = _lowClass(X,threshold,c)
+    
+    snps = {}
+    
+    for i in snpsCount.keys():
+      
+        key = snpsCount[i]
+        snps[key]=[]
+        
+    for i in snpsCount.keys():
+        
+        key = snpsCount[i]
+        snps[key].append(i)
+        
+    snpss = list(snps.keys())
+    
+    sc = sorted(snpss,reverse=True)
+    
+    print("sc max to min is ",sc)
+        
+    for i in range(30):
+        
+        key = sc[i]
+        snp = snps[key][0]
+        snps[key].remove(0)
+        snpsRed[snp] = key
+        
+    return snpsRed
     
     
     
